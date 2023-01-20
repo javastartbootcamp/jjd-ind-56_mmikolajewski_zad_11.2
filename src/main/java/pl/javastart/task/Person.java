@@ -19,14 +19,16 @@ public class Person {
         }
     }
 
-    private static void validateLastName(String lastName, String message) {
-        if (lastName == null || lastName.length() < 2) {
+    private void validateFirstName(String firstName, String message) {
+        if (firstName == null || firstName.length() < 2) {
             throw new NameUndefinedException(message);
         }
     }
 
-    private static void validateFirstName(String firstName, String message) {
-        validateLastName(firstName, message);
+    private void validateLastName(String lastName, String message) {
+        if (lastName == null || lastName.length() < 2) {
+            throw new NameUndefinedException(message);
+        }
     }
 
     public String getFirstName() {
