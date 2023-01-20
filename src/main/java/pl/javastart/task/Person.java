@@ -1,35 +1,32 @@
 package pl.javastart.task;
 
 public class Person {
-    String firstName;
-    String lastName;
-    int age;
-    String pesel;
+    private String firstName;
+    private String lastName;
+    private int age;
+    private String pesel;
 
     public Person(String firstName, String lastName, int age, String pesel) {
-        firstNameException(firstName, "Nieprawidłowe imię  - null lub za krótkie, min. 2 znaki");
-        lastNameException(lastName, "Nieprawidłowe nazwisko - null lub za krótkie, min. 2 znaki");
-        ageException(age);
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
+        setFirstName(firstName);
+        setLastName(lastName);
+        setAge(age);
         this.pesel = pesel;
     }
 
-    private static void ageException(int age) {
+    private static void checkAge(int age) {
         if (age < 1) {
             throw new IncorrectAgeException("Nieprawidłowy wiek");
         }
     }
 
-    private static void lastNameException(String lastName, String message) {
+    private static void validateLastName(String lastName, String message) {
         if (lastName == null || lastName.length() < 2) {
             throw new NameUndefinedException(message);
         }
     }
 
-    private static void firstNameException(String firstName, String message) {
-        lastNameException(firstName, message);
+    private static void validateFirstName(String firstName, String message) {
+        validateLastName(firstName, message);
     }
 
     public String getFirstName() {
@@ -37,7 +34,7 @@ public class Person {
     }
 
     public void setFirstName(String firstName) {
-        firstNameException(firstName, "Nieprawidłowe imię, błąd zmiany  - null lub za krótkie, min. 2 znaki");
+        validateFirstName(firstName, "Nieprawidłowe imię, błąd - null lub za krótkie, min. 2 znaki");
         this.firstName = firstName;
     }
 
@@ -46,7 +43,7 @@ public class Person {
     }
 
     public void setLastName(String lastName) {
-        lastNameException(lastName, "Nieprawidłowe nazwisko, błąd zmiany - null lub za krótkie, min. 2 znaki");
+        validateLastName(lastName, "Nieprawidłowe nazwisko, błąd - null lub za krótkie, min. 2 znaki");
         this.lastName = lastName;
     }
 
@@ -55,7 +52,7 @@ public class Person {
     }
 
     public void setAge(int age) {
-        ageException(age);
+        checkAge(age);
         this.age = age;
     }
 
